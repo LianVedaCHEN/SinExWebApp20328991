@@ -15,14 +15,26 @@ namespace SinExWebApp20328991.Controllers
     {
         private SinExDatabaseContext db = new SinExDatabaseContext();
         // GET: Shipments/GenerateHistoryReport
-        public ActionResult GenerateHistoryReport(int? ShippingAccountId)
+        public ActionResult GenerateHistoryReport(int?ShippingAccountId,string sortOrder, string currentServiceType, string currentShippedDate,string currentDeliveredDate ,
+           string currentRecipientName,string currentOrigin ,string currentDestination,int? currentShippingAccountId)
         {
             // Instantiate an instance of the ShipmentsReportViewModel and the ShipmentsSearchViewModel.
             var shipmentSearch = new ShipmentsReportViewModel();
             shipmentSearch.Shipment = new ShipmentsSearchViewModel();
 
+            //Retain search conditions for sorting
+            if (ShippingAccountId == null)
+            {
+                ShippingAccountId = currentShippingAccountId;
+            }
+            ViewBag.CurrentShippingAccountId = ShippingAccountId;
+
             // Populate the ShippingAccountId dropdown list.
             shipmentSearch.Shipment.ShippingAccounts = PopulateShippingAccountsDropdownList().ToList();
+            if (currentShippingAccountId!=null)
+            {
+                shipmentSearch.Shipment.ShippingAccountId = (int)currentShippingAccountId;
+            }
 
             // Initialize the query to retrieve shipments using the ShipmentsListViewModel.
             var shipmentQuery = from s in db.Shipments
@@ -42,6 +54,57 @@ namespace SinExWebApp20328991.Controllers
             // Add the condition to select a spefic shipping account if shipping account id is not null.
             if (ShippingAccountId != null)
             {
+                ViewBag.ServiceTypeSortParm = sortOrder == "ServiceType" ? "ServiceType_desc" : "ServiceType";
+                ViewBag.ShippedDateSortParm = sortOrder == "ShippedDate" ? "ShippedDate_desc" : "ShippedDate";
+                ViewBag.DeliveredDateSortParm = sortOrder == "DeliveredDate" ? "DeliveredDate_desc" : "DeliveredDate";
+                ViewBag.RecipientNameSortParm = sortOrder == "RecipientName" ? "RecipientName_desc" : "RecipientName";
+                ViewBag.OriginSortParm = sortOrder == "Origin" ? "Origin_desc" : "Origin";
+                ViewBag.DestinationSortParm = sortOrder == "Destination" ? "Destination_desc" : "Destination";
+                switch (sortOrder)
+                {
+                    case "ServiceType_desc":
+                        shipmentQuery = shipmentQuery.OrderByDescending(s => s.ServiceType);
+                        break;
+                    case "ServiceType":
+                        shipmentQuery = shipmentQuery.OrderBy(s => s.ServiceType);
+                        break;
+                    case "ShippedDate_desc":
+                        shipmentQuery = shipmentQuery.OrderByDescending(s => s.ShippedDate);
+                        break;
+                    case "ShippedDate":
+                        shipmentQuery = shipmentQuery.OrderBy(s => s.ShippedDate);
+                        break;
+                    case "DeliveredDate_desc":
+                        shipmentQuery = shipmentQuery.OrderByDescending(s => s.DeliveredDate);
+                        break;
+                    case "DeliveredDate":
+                        shipmentQuery = shipmentQuery.OrderBy(s => s.DeliveredDate);
+                        break;
+                    case "RecipientName_desc":
+                        shipmentQuery = shipmentQuery.OrderByDescending(s => s.RecipientName);
+                        break;
+                    case "RecipientName":
+                        shipmentQuery = shipmentQuery.OrderBy(s => s.RecipientName);
+                        break;
+                    case "Origin_desc":
+                        shipmentQuery = shipmentQuery.OrderByDescending(s => s.Origin);
+                        break;
+                    case "Origin":
+                        shipmentQuery = shipmentQuery.OrderBy(s => s.Origin);
+                        break;
+                    case "Destination_desc":
+                        shipmentQuery = shipmentQuery.OrderByDescending(s => s.Destination);
+                        break;
+                    case "Destination":
+                        shipmentQuery = shipmentQuery.OrderBy(s => s.Destination);
+                        break;
+                    default:
+                        shipmentQuery = shipmentQuery.OrderBy(s => s.WaybillId);
+                        break;
+
+
+
+                }
                 // TODO: Construct the LINQ query to retrive only the shipments for the specified shipping account id.
                 shipmentQuery = shipmentQuery.Where(s=>s.ShippingAccountId==ShippingAccountId);
                 shipmentSearch.Shipments = shipmentQuery.ToList();

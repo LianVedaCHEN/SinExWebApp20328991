@@ -10,24 +10,88 @@
             @Html.DisplayNameFor(model => model.WaybillId)
         </th>
         <th>
+            @Html.ActionLink("Service Type","GenerateHistoryReport",new {sortOrder = ViewBag.ServiceTypeSortParm,
+           currentServiceType = ViewBag.CurrentServiceType,
+           currentShippingAccountId = ViewBag.CurrentShippingAccountId,
+           currentShippedDate = ViewBag.CurrentShippedDate,
+           currentDeliveredDate = ViewBag.CurrentDeliveredDate,
+           currentRecipientName = ViewBag.CurrentRecipientName,
+           currentOrigin = ViewBag.CurrentOrigin,
+           currentDestination = ViewBag.CurrentDestination
+       })
             @Html.DisplayNameFor(model => model.ServiceType)
         </th>
         <th>
+            @Html.ActionLink("Shipped Date", "GenerateHistoryReport", new
+       {
+           sortOrder = ViewBag.ShippedDateSortParm,
+           currentServiceType = ViewBag.CurrentServiceType,
+           currentShippingAccountId = ViewBag.CurrentShippingAccountId,
+           currentShippedDate = ViewBag.CurrentShippedDate,
+           currentDeliveredDate = ViewBag.CurrentDeliveredDate,
+           currentRecipientName = ViewBag.CurrentRecipientName,
+           currentOrigin = ViewBag.CurrentOrigin,
+           currentDestination = ViewBag.CurrentDestination
+       })
             @Html.DisplayNameFor(model => model.ShippedDate)
         </th>
         <th>
+            @Html.ActionLink("Delivered Date", "GenerateHistoryReport", new
+       {
+           sortOrder = ViewBag.DeliveredDateSortParm,
+           currentServiceType = ViewBag.CurrentServiceType,
+           currentShippingAccountId = ViewBag.CurrentShippingAccountId,
+           currentShippedDate = ViewBag.CurrentShippedDate,
+           currentDeliveredDate = ViewBag.CurrentDeliveredDate,
+           currentRecipientName = ViewBag.CurrentRecipientName,
+           currentOrigin = ViewBag.CurrentOrigin,
+           currentDestination = ViewBag.CurrentDestination
+       })
             @Html.DisplayNameFor(model => model.DeliveredDate)
         </th>
         <th>
+            @Html.ActionLink("Recipient Name", "GenerateHistoryReport", new
+       {
+           sortOrder = ViewBag.RecipientNameSortParm,
+           currentShippingAccountId = ViewBag.CurrentShippingAccountId,
+                currentServiceType = ViewBag.CurrentServiceType,
+           currentShippedDate = ViewBag.CurrentShippedDate,
+           currentDeliveredDate = ViewBag.CurrentDeliveredDate,
+           currentRecipientName = ViewBag.CurrentRecipientName,
+           currentOrigin = ViewBag.CurrentOrigin,
+           currentDestination = ViewBag.CurrentDestination
+       })
             @Html.DisplayNameFor(model => model.RecipientName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.NumberOfPackages)
         </th>
         <th>
+            @Html.ActionLink("Origin", "GenerateHistoryReport", new
+       {
+           sortOrder = ViewBag.OriginSortParm,
+           currentServiceType = ViewBag.CurrentServiceType,
+           currentShippingAccountId = ViewBag.CurrentShippingAccountId,
+           currentShippedDate = ViewBag.CurrentShippedDate,
+           currentDeliveredDate = ViewBag.CurrentDeliveredDate,
+           currentRecipientName = ViewBag.CurrentRecipientName,
+           currentOrigin = ViewBag.CurrentOrigin,
+           currentDestination = ViewBag.CurrentDestination
+       })
             @Html.DisplayNameFor(model => model.Origin)
         </th>
         <th>
+            @Html.ActionLink("Destination", "GenerateHistoryReport", new
+       {
+           sortOrder = ViewBag.DestinationSortParm,
+           currentServiceType = ViewBag.CurrentServiceType,
+           currentShippingAccountId = ViewBag.CurrentShippingAccountId,
+           currentShippedDate = ViewBag.CurrentShippedDate,
+           currentDeliveredDate = ViewBag.CurrentDeliveredDate,
+           currentRecipientName = ViewBag.CurrentRecipientName,
+           currentOrigin = ViewBag.CurrentOrigin,
+           currentDestination = ViewBag.CurrentDestination
+       })
             @Html.DisplayNameFor(model => model.Destination)
         </th>
     

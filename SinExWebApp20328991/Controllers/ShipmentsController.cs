@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using SinExWebApp20328991.Models;
 using SinExWebApp20328991.ViewModels;
+using X.PagedList;
 
 namespace SinExWebApp20328991.Controllers
 {
@@ -15,17 +16,23 @@ namespace SinExWebApp20328991.Controllers
     {
         private SinExDatabaseContext db = new SinExDatabaseContext();
         // GET: Shipments/GenerateHistoryReport
-        public ActionResult GenerateHistoryReport(int?ShippingAccountId,string sortOrder, string currentServiceType, string currentShippedDate,string currentDeliveredDate ,
-           string currentRecipientName,string currentOrigin ,string currentDestination,int? currentShippingAccountId)
+        public ActionResult GenerateHistoryReport(int?ShippingAccountId,string sortOrder, string currentServiceType, string currentShippedDate,string currentDeliveredDate ,string currentRecipientName,string currentOrigin ,string currentDestination,int? currentShippingAccountId,int? page)
         {
             // Instantiate an instance of the ShipmentsReportViewModel and the ShipmentsSearchViewModel.
             var shipmentSearch = new ShipmentsReportViewModel();
             shipmentSearch.Shipment = new ShipmentsSearchViewModel();
 
+            ViewBag.CurrentSort = sortOrder;
+            int pageSize=5;
+            int pageNumber = (page ?? 1);
             //Retain search conditions for sorting
             if (ShippingAccountId == null)
             {
                 ShippingAccountId = currentShippingAccountId;
+            }
+            else
+            {
+                page = 1;
             }
             ViewBag.CurrentShippingAccountId = ShippingAccountId;
 
@@ -107,12 +114,12 @@ namespace SinExWebApp20328991.Controllers
                 }
                 // TODO: Construct the LINQ query to retrive only the shipments for the specified shipping account id.
                 shipmentQuery = shipmentQuery.Where(s=>s.ShippingAccountId==ShippingAccountId);
-                shipmentSearch.Shipments = shipmentQuery.ToList();
+                shipmentSearch.Shipments = shipmentQuery.ToPagedList(pageNumber,pageSize);
             }
             else
             {
                 // Return an empty result if no shipping account id has been selected.
-                shipmentSearch.Shipments = new ShipmentsListViewModel[0];
+                shipmentSearch.Shipments = new ShipmentsListViewModel[0].ToPagedList(pageNumber, pageSize);
             }
 
             return View(shipmentSearch);

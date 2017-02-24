@@ -48,6 +48,8 @@
 \\Mac\Home\Documents\Visual Studio 2015\Projects\SinExWebApp20328991\SinExWebApp20328991\bin\System.Web.WebPages.dll
 \\Mac\Home\Documents\Visual Studio 2015\Projects\SinExWebApp20328991\SinExWebApp20328991\bin\System.Web.WebPages.Razor.dll
 \\Mac\Home\Documents\Visual Studio 2015\Projects\SinExWebApp20328991\SinExWebApp20328991\bin\WebGrease.dll
+\\Mac\Home\Documents\Visual Studio 2015\Projects\SinExWebApp20328991\SinExWebApp20328991\bin\X.PagedList.dll
+\\Mac\Home\Documents\Visual Studio 2015\Projects\SinExWebApp20328991\SinExWebApp20328991\bin\X.PagedList.Mvc.dll
 \\Mac\Home\Documents\Visual Studio 2015\Projects\SinExWebApp20328991\SinExWebApp20328991\bin\Microsoft.AI.DependencyCollector.xml
 \\Mac\Home\Documents\Visual Studio 2015\Projects\SinExWebApp20328991\SinExWebApp20328991\bin\Microsoft.AI.ServerTelemetryChannel.xml
 \\Mac\Home\Documents\Visual Studio 2015\Projects\SinExWebApp20328991\SinExWebApp20328991\bin\Microsoft.AI.Web.xml

@@ -7,13 +7,60 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SinExWebApp20328991.Models;
+using SinExWebApp20328991.ViewModels;
 
 namespace SinExWebApp20328991.Controllers
 {
     public class ShipmentsController : Controller
     {
         private SinExDatabaseContext db = new SinExDatabaseContext();
+        // GET: Shipments/GenerateHistoryReport
+        public ActionResult GenerateHistoryReport(int? ShippingAccountId)
+        {
+            // Instantiate an instance of the ShipmentsReportViewModel and the ShipmentsSearchViewModel.
+            var shipmentSearch = new ShipmentsReportViewModel();
+            shipmentSearch.Shipment = new ShipmentsSearchViewModel();
 
+            // Populate the ShippingAccountId dropdown list.
+            shipmentSearch.Shipment.ShippingAccounts = PopulateShippingAccountsDropdownList().ToList();
+
+            // Initialize the query to retrieve shipments using the ShipmentsListViewModel.
+            var shipmentQuery = from s in db.Shipments
+                                select new ShipmentsListViewModel
+                                {
+                                    WaybillId = s.WaybillId,
+                                    ServiceType = s.ServiceType,
+                                    ShippedDate = s.ShippedDate,
+                                    DeliveredDate = s.DeliveredDate,
+                                    RecipientName = s.RecipientName,
+                                    NumberOfPackages = s.NumberOfPackages,
+                                    Origin = s.Origin,
+                                    Destination = s.Destination,
+                                    ShippingAccountId = s.ShippingAccountId
+                                };
+
+            // Add the condition to select a spefic shipping account if shipping account id is not null.
+            if (ShippingAccountId != null)
+            {
+                // TODO: Construct the LINQ query to retrive only the shipments for the specified shipping account id.
+                shipmentQuery = shipmentQuery.Where(s=>s.ShippingAccountId==ShippingAccountId);
+                shipmentSearch.Shipments = shipmentQuery.ToList();
+            }
+            else
+            {
+                // Return an empty result if no shipping account id has been selected.
+                shipmentSearch.Shipments = new ShipmentsListViewModel[0];
+            }
+
+            return View(shipmentSearch);
+        }
+
+        private SelectList PopulateShippingAccountsDropdownList()
+        {
+            // TODO: Construct the LINQ query to retrieve the unique list of shipping account ids.
+            var shippingAccountQuery = db.Shipments.Select(s=>s.ShippingAccountId).Distinct().OrderBy(s=>s);
+            return new SelectList(shippingAccountQuery);
+        }
         // GET: Shipments
         public ActionResult Index()
         {

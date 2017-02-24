@@ -222,6 +222,9 @@
     <Compile Include="Models\SinExDatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ShipmentsListViewModel.cs" />
+    <Compile Include="ViewModels\ShipmentsReportViewModel.cs" />
+    <Compile Include="ViewModels\ShipmentsSearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -316,6 +319,9 @@
     <Content Include="Views\Shipments\Details.cshtml" />
     <Content Include="Views\Shipments\Edit.cshtml" />
     <Content Include="Views\Shipments\Index.cshtml" />
+    <Content Include="Views\Shipments\GenerateHistoryReport.cshtml" />
+    <Content Include="Views\Shipments\_ShipmentsSearchPartial.cshtml" />
+    <Content Include="Views\Shipments\_ShipmentsListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

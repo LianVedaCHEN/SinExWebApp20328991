@@ -218,6 +218,8 @@ C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\WebGrease.dll
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\X.PagedList.dll
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\X.PagedList.Mvc.dll
+C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\EntityFramework.xml
+C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\EntityFramework.SqlServer.xml
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\Microsoft.AI.Web.xml
@@ -233,8 +235,6 @@ C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\System.Web.WebPages.Razor.xml
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\Antlr3.Runtime.pdb
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\Newtonsoft.Json.xml
-C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\EntityFramework.xml
-C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\EntityFramework.SqlServer.xml
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\Microsoft.AspNet.Identity.EntityFramework.xml
@@ -247,6 +247,5 @@ C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\obj\Debug\SinExWebApp20328991.csprojResolveAssemblyReference.cache
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\obj\Debug\SinExWebApp20328991.dll
 C:\Users\lchenbk\Downloads\SinExWebApp20328991\SinExWebApp20328991\SinExWebApp20328991\obj\Debug\SinExWebApp20328991.pdb

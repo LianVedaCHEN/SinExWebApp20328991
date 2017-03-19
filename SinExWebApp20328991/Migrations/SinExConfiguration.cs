@@ -6,9 +6,9 @@ namespace SinExWebApp20328991.Migrations
     using System.Linq;
     using Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<SinExWebApp20328991.Models.SinExDatabaseContext>
+    internal sealed class SinExConfiguration : DbMigrationsConfiguration<SinExWebApp20328991.Models.SinExDatabaseContext>
     {
-        public Configuration()
+        public SinExConfiguration()
         {
             AutomaticMigrationsEnabled = true;
         }
@@ -27,15 +27,14 @@ namespace SinExWebApp20328991.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            // Add package type data.
             context.PackageTypes.AddOrUpdate(
-                p => p.PackageTypeID,
-                new PackageType { PackageTypeID = 1, Type = "Envelope", Description = "for correspondence and documents only with no commercial value" },
-                new PackageType { PackageTypeID = 2, Type = "Pak", Description = "for flat, non-breakable articles including heavy documents" },
-                new PackageType { PackageTypeID = 3, Type = "Tube", Description = "for larger documents, such as blueprints, which should be rolled rather than folded" },
-                new PackageType { PackageTypeID = 4, Type = "Box", Description = "for bulky items, such as electronic parts and textile samples" },
-                new PackageType { PackageTypeID = 5, Type = "Customer", Description = "for packaging provided by customer" }
-                );
+               p => p.PackageTypeID,
+               new PackageType { PackageTypeID = 1, Type = "Envelope", Description = "for correspondence and documents only with no commercial value" },
+               new PackageType { PackageTypeID = 2, Type = "Pak", Description = "for flat, non-breakable articles including heavy documents" },
+               new PackageType { PackageTypeID = 3, Type = "Tube", Description = "for larger documents, such as blueprints, which should be rolled rather than folded" },
+               new PackageType { PackageTypeID = 4, Type = "Box", Description = "for bulky items, such as electronic parts and textile samples" },
+               new PackageType { PackageTypeID = 5, Type = "Customer", Description = "for packaging provided by customer" }
+               );
 
             // Add service type data.
             context.ServiceTypes.AddOrUpdate(
@@ -91,7 +90,7 @@ namespace SinExWebApp20328991.Migrations
             // Add currency data.
             context.Currencies.AddOrUpdate(
                 p => p.CurrencyCode,
-                new Currency{ CurrencyCode = "CNY", ExchangeRate=1.00 },
+                new Currency { CurrencyCode = "CNY", ExchangeRate = 1.00 },
                 new Currency { CurrencyCode = "HKD", ExchangeRate = 1.03 },
                 new Currency { CurrencyCode = "MOP", ExchangeRate = 1.16 },
                 new Currency { CurrencyCode = "TWD", ExchangeRate = 4.56 }
@@ -181,6 +180,7 @@ namespace SinExWebApp20328991.Migrations
                 new Shipment { WaybillId = 24, ReferenceNumber = "", ServiceType = "Ground", ShippedDate = new DateTime(2017, 01, 15), DeliveredDate = new DateTime(2017, 01, 19), RecipientName = "Peter Pang", NumberOfPackages = 3, Origin = "Beijing", Destination = "Lhasa", Status = "Delivered", ShippingAccountId = 2 },
                 new Shipment { WaybillId = 25, ReferenceNumber = "386456", ServiceType = "Same Day", ShippedDate = new DateTime(2017, 01, 05), DeliveredDate = new DateTime(2017, 01, 05), RecipientName = "Jerry Jia", NumberOfPackages = 1, Origin = "Beijing", Destination = "Hangzhou", Status = "Delivered", ShippingAccountId = 2 }
             );
+           
         }
     }
 }

@@ -23,6 +23,8 @@ namespace SinExWebApp20328991.Models
         public virtual string Destination { get; set; }
         public virtual string Status { get; set; }
         public virtual int ShippingAccountId { get; set; }
+        //navigation property to Shipment Account
+        public virtual ShippingAccount ShippingAccount { get; set; }
 
     }
 }

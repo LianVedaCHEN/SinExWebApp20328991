@@ -1,0 +1,35 @@
+﻿@model SinExWebApp20328991.ViewModels.FeesSearchViewModel
+
+
+@using (Html.BeginForm("PackagesInfo", "ServicePackageFees", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    for (int i = 0; i < ViewBag.NoOfPack; i++)
+    {
+        <div class="col-md-10">
+         @Html.LabelFor(a => a.PackageType, "Please select the knid of currency used to display cost")
+         @Html.DropDownListFor(a => a.PackageType, Model.PackageTypes, "Please Select")
+         @Html.LabelFor(model => model.weight, htmlAttributes: new { @class = "control-label col-md-2" })
+    
+         @Html.TextBoxFor(model => model.weight, new { htmlAttributes = new { @class = "form-control" } })
+         @Html.ValidationMessageFor(model => model.weight, "", new { @class = "text-danger" })
+        </div>
+    }
+            
+
+                <div class="form-group">
+                    @Html.Hidden("firstTime","no")
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="" class="btn btn-default" />
+                    </div>
+                </div>
+    
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }

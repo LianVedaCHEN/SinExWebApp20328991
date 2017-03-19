@@ -16,7 +16,8 @@ namespace SinExWebApp20328991.Controllers
     {
         private SinExDatabaseContext db = new SinExDatabaseContext();
         // GET: Shipments/GenerateHistoryReport
-        public ActionResult GenerateHistoryReport(int?ShippingAccountId,string sortOrder, string currentServiceType, string currentShippedDate,string currentDeliveredDate ,string currentRecipientName,string currentOrigin ,string currentDestination,int? currentShippingAccountId,int? page)
+        [Authorize(Roles = "Employee,Customer")]
+        public ActionResult GenerateHistoryReport(int?ShippingAccountId,DateTime? EndDate,DateTime? StartDate,DateTime? currentStartDate, DateTime? currentEndDate, string sortOrder, string currentServiceType, string currentShippedDate,string currentDeliveredDate ,string currentRecipientName,string currentOrigin ,string currentDestination,int? currentShippingAccountId,int? page)
         {
             // Instantiate an instance of the ShipmentsReportViewModel and the ShipmentsSearchViewModel.
             var shipmentSearch = new ShipmentsReportViewModel();
@@ -26,16 +27,57 @@ namespace SinExWebApp20328991.Controllers
             int pageSize=5;
             int pageNumber = (page ?? 1);
             //Retain search conditions for sorting
-            if (ShippingAccountId == null)
+            if (System.Web.HttpContext.Current.User.IsInRole("Employee"))
             {
-                ShippingAccountId = currentShippingAccountId;
+                if (ShippingAccountId == null)
+                {
+                    ShippingAccountId = currentShippingAccountId;
+                    if (EndDate == null || StartDate == null)
+                    {
+                        EndDate = currentEndDate;
+                        StartDate = currentStartDate;
+                    }
+
+                }
+                else
+                {
+                    page = 1;
+                }
+                ViewBag.CurrentShippingAccountId = ShippingAccountId;
+            }
+            if (System.Web.HttpContext.Current.User.IsInRole("Customer"))
+            {
+                if (ShippingAccountId == null)
+                {
+                    string tempUserName = System.Web.HttpContext.Current.User.Identity.Name;
+                    var tempShippingAccount=db.ShippingAccount.SingleOrDefault(s => s.UserName == tempUserName);
+                    int tempId = tempShippingAccount.ShippingAccountId;
+                    ShippingAccountId = tempId;
+                    if (EndDate == null || StartDate == null)
+                    {
+                        EndDate = currentEndDate;
+                        StartDate = currentStartDate;
+                    }
+
+                }
+                else
+                {
+                    page = 1;
+                }
+                ViewBag.CurrentShippingAccountId = ShippingAccountId;
+            }
+            if (EndDate == null || StartDate == null)
+            {
+                EndDate = currentEndDate;
+                StartDate = currentStartDate;
+                ViewBag.CurrentEndDate = DateTime.Now.ToString("dd/mm/yyyy");
+                ViewBag.CurrentStartDate = DateTime.Now.ToString("dd/mm/yyyy");
             }
             else
             {
-                page = 1;
+                ViewBag.CurrentEndDate = EndDate;
+                ViewBag.CurrentStartDate = StartDate;
             }
-            ViewBag.CurrentShippingAccountId = ShippingAccountId;
-
             // Populate the ShippingAccountId dropdown list.
             shipmentSearch.Shipment.ShippingAccounts = PopulateShippingAccountsDropdownList().ToList();
             if (currentShippingAccountId!=null)
@@ -61,6 +103,7 @@ namespace SinExWebApp20328991.Controllers
             // Add the condition to select a spefic shipping account if shipping account id is not null.
             if (ShippingAccountId != null)
             {
+               
                 ViewBag.ServiceTypeSortParm = sortOrder == "ServiceType" ? "ServiceType_desc" : "ServiceType";
                 ViewBag.ShippedDateSortParm = sortOrder == "ShippedDate" ? "ShippedDate_desc" : "ShippedDate";
                 ViewBag.DeliveredDateSortParm = sortOrder == "DeliveredDate" ? "DeliveredDate_desc" : "DeliveredDate";
@@ -113,9 +156,14 @@ namespace SinExWebApp20328991.Controllers
 
                 }
                 // TODO: Construct the LINQ query to retrive only the shipments for the specified shipping account id.
-                shipmentQuery = shipmentQuery.Where(s=>s.ShippingAccountId==ShippingAccountId);
-                shipmentSearch.Shipments = shipmentQuery.ToPagedList(pageNumber,pageSize);
+                shipmentQuery = shipmentQuery.Where(s => s.ShippingAccountId == ShippingAccountId);
+                if (EndDate != null &&StartDate != null)
+                {
+                    shipmentQuery = shipmentQuery.Where(s => (DateTime.Compare(s.ShippedDate, (DateTime)EndDate) <= 0) && (DateTime.Compare(s.DeliveredDate, (DateTime)StartDate) >= 0));
+                }
+                    shipmentSearch.Shipments = shipmentQuery.ToPagedList(pageNumber, pageSize);
             }
+            
             else
             {
                 // Return an empty result if no shipping account id has been selected.

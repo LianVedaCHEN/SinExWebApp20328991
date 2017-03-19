@@ -32,5 +32,6 @@ namespace SinExWebApp20328991.Models
         public System.Data.Entity.DbSet<SinExWebApp20328991.Models.PackageTypeSize> PackageTypeSizes { get; set; }
 
         public System.Data.Entity.DbSet<SinExWebApp20328991.Models.Shipment> Shipments { get; set; }
+        public System.Data.Entity.DbSet<SinExWebApp20328991.Models.ShippingAccount> ShippingAccount { get; set; }
     }
 }

@@ -1,0 +1,97 @@
+﻿@model SinExWebApp20328991.ViewModels.FeesReportViewModel
+
+@{
+    ViewBag.Title = "PackagesInfo";
+}
+
+<h2>Please Input Packages</h2>
+<div class="col-md-10">
+    <div class="col-sm-2"> Destination: @ViewBag.FeeDestination </div>  
+    <div class="col-sm-2">Origin:@ViewBag.FeeOrigin </div> 
+    <div class="col-sm-2">Seervice Type:@ViewBag.ServeType </div> <div class="col-sm-2"> Number Of Packages:@ViewBag.noOfPack</div> <div class="col-sm-2">Currency Used: @ViewBag.currencyUsed</div>
+</div>
+    @if (ViewBag.Switch1)
+    {
+        using (Html.BeginForm("PackagesInfo", "ServicePackageFees", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            int n = Convert.ToInt32(ViewBag.NoOfPack);
+            for (int i = 0; i < n; i++)
+            {
+                <div class="col-md-10">
+                    @Html.LabelFor(a => a.Package.PackageType, "Please select the knid of currency used to display cost")
+                    @Html.DropDownList("[" + i + "].PackageType", Model.Package.PackageTypes, "Please Select")
+                    @Html.LabelFor(model => model.Package.weight)
+
+                    @Html.TextBox("[" + i + "].weight")
+                    @Html.ValidationMessageFor(model => model.Package.weight, "", new { @class = "text-danger" })
+                </div>
+            }
+
+
+            <div class="form-group">
+                <div>
+                    @Html.Hidden("firstTime", "no")
+                    @Html.HiddenFor(Model => Model.destination, htmlAttributes: new { @value = @ViewBag.FeeDestination })
+                    @Html.HiddenFor(Model => Model.origin, htmlAttributes: new { @value = @ViewBag.FeeOrigin })
+                    @Html.HiddenFor(Model => Model.servedType, htmlAttributes: new { @value = @ViewBag.ServeType })
+                    @Html.HiddenFor(Model => Model.NumberOfPackage, htmlAttributes: new { @value = @ViewBag.noOfPack })
+                    @Html.HiddenFor(Model => Model.currency, new { @value = @ViewBag.currencyUsed })
+                </div>
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Query" class="btn btn-default" />
+                </div>
+            </div>
+
+        }
+
+
+
+    }
+    else
+    {
+        <p>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Packages.FirstOrDefault().PackageType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Packages.FirstOrDefault().weight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Packages.FirstOrDefault().cost)
+                </th>
+                <th></th>
+            </tr>
+            @if (Model.Packages != null)
+            {
+                foreach (var item in Model.Packages)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PackageType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.weight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cost)
+                        </td>
+                        <td>
+                            @if (item.IsBeyond)
+                            {
+                                @: Your package's weight is beyond the limit of this type, so you will get penalty of 500.
+            }
+                        </td>
+
+                    </tr>
+                }
+            }
+        </table>
+
+
+    }
+    Total Cost:@Model.TotalCost
+

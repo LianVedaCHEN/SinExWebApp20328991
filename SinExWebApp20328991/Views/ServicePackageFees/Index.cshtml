@@ -7,8 +7,21 @@
 <h2>Service Package Fees</h2>
 
 <p>
-  
+    The currency used to display:
+    @using (Html.BeginForm("Index", "ServicePackageFees", FormMethod.Post))
+    {
+  <select name="currency">
+      <option value="CNY">CNY</option>
+      <option value="HKD">HKD</option>
+      <option value="TWD">TWD</option>
+      <option value="MOP">MOP</option>
+  </select>
+<div class="col-md-offset-2 col-md-10">
+    <input type="submit" value="Query" class="btn btn-default" />
+</div>
+    }
 </p>
+@{var rate = ViewBag.currencyRate;}
 <table class="table">
     <tr>
         <th>

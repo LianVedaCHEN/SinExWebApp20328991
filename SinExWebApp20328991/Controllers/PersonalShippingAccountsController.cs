@@ -40,9 +40,25 @@ namespace SinExWebApp20328991.Controllers
         }
 
         // GET: PersonalShippingAccounts/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit()
         {
-            if (id == null)
+            if (System.Web.HttpContext.Current.User.IsInRole("Customer"))
+            {
+
+                string tempUserName = System.Web.HttpContext.Current.User.Identity.Name;
+                var tempShippingAccount = db.ShippingAccount.SingleOrDefault(s => s.UserName == tempUserName);
+                int tempId = tempShippingAccount.ShippingAccountId;
+                PersonalShippingAccount personalShippingAccount = (PersonalShippingAccount)db.ShippingAccount.Find(tempId);
+                return View(personalShippingAccount);
+            }
+            if (System.Web.HttpContext.Current.User.IsInRole("Employee"))
+            {
+
+              
+                return View("There is no infomration about Employee Account so you can not edit! ");
+            }
+
+            /*if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -50,8 +66,8 @@ namespace SinExWebApp20328991.Controllers
             if (personalShippingAccount == null)
             {
                 return HttpNotFound();
-            }
-            return View(personalShippingAccount);
+            }*/
+            return HttpNotFound();
         }
 
         // POST: PersonalShippingAccounts/Edit/5
@@ -63,8 +79,9 @@ namespace SinExWebApp20328991.Controllers
         {
             if (ModelState.IsValid)
             {
-               // db.Entry(personalShippingAccount).State = EntityState.Modified;
-               // db.SaveChanges();
+                personalShippingAccount.UserName = System.Web.HttpContext.Current.User.Identity.Name;
+                db.Entry(personalShippingAccount).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index","Home");
             }
             return View(personalShippingAccount);

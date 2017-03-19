@@ -40,9 +40,27 @@ namespace SinExWebApp20328991.Controllers
         }
 
         // GET: BusinessShippingAccounts/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit()
         {
-            if (id == null)
+            if (System.Web.HttpContext.Current.User.IsInRole("Customer"))
+            {
+
+                string tempUserName = System.Web.HttpContext.Current.User.Identity.Name;
+                var tempShippingAccount = db.ShippingAccount.SingleOrDefault(s => s.UserName == tempUserName);
+                int tempId = tempShippingAccount.ShippingAccountId;
+                BusinessShippingAccount BusinessShippingAccount = (BusinessShippingAccount)db.ShippingAccount.Find(tempId);
+                return View(BusinessShippingAccount);
+            }
+            if (System.Web.HttpContext.Current.User.IsInRole("Employee"))
+            {
+
+
+                return View("There is no infomration about Employee Account so you can not edit! ");
+            }
+
+            
+            return HttpNotFound();
+            /*if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -51,7 +69,7 @@ namespace SinExWebApp20328991.Controllers
             {
                 return HttpNotFound();
             }
-            return View(businessShippingAccount);
+            return View(businessShippingAccount);*/
         }
 
         // POST: BusinessShippingAccounts/Edit/5

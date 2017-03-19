@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SinExWebApp20328991.ViewModels.FeesListViewModel>
+
+<p>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PackageType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cost)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PackageType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cost)
+        </td>
+        <td>
+            @if(item.IsBeyond){
+                 @: Your package's weight is beyond the limit of this type, so you will get penalty of 500.  
+            }
+        </td>
+      
+    </tr>
+}
+
+</table>

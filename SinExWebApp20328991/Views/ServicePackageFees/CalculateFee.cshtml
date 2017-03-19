@@ -1,0 +1,23 @@
+﻿@model SinExWebApp20328991.ViewModels.FeeSearchViewModel
+
+@{
+    ViewBag.Title = "CalculateFee";
+}
+
+<h2>CalculateFee</h2>
+@using (Html.BeginForm("CalculateFee", "ServicePackageFees", FormMethod.Get))
+{
+    @Html.LabelFor(a => a.origin, "Origin: ")
+    @Html.DropDownListFor(a => a.origin, Model.Places, "Please select")
+    @Html.LabelFor(a => a.destination, "Destination: ")
+    @Html.DropDownListFor(a => a.destination, Model.Places, "Please select")
+    @Html.LabelFor(a => a.NumberOfPackages, "Number of Packages ")
+    @Html.TextBoxFor(a => a.NumberOfPackages)
+    @Html.ValidationMessageFor(model => model.NumberOfPackages, "", new { @class = "text-danger" })
+    @Html.LabelFor(a => a.ServedType, "Service Types")
+    @Html.DropDownListFor(a => a.ServedType, Model.ServiceTypes, "Please select")
+    @Html.LabelFor(a => a.Currency, "Please select the knid of currency used to display cost")
+    @Html.DropDownListFor(a => a.Currency, Model.Currencies, "Please select")
+    <input type="submit" value="Search" />
+}
+

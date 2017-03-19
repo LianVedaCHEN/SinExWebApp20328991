@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SinExWebApp20328991.Models
-{   
+{
     [Table("ShippingAccount")]
     public class ShippingAccount
     {
@@ -15,6 +15,9 @@ namespace SinExWebApp20328991.Models
         [StringLength(30, ErrorMessage ="The length of email address should be less than 30")]
         [EmailAddress(ErrorMessage ="Invalid Email Address")]
         public virtual string Email { get; set; }
+
+        [StringLength(10, ErrorMessage = "The length of user name should be less than 10")]
+        public virtual string UserName { get; set; }
 
         [Required(ErrorMessage = "The phone number field is required")]
         [StringLength(14,MinimumLength =8, ErrorMessage = "The number of phone number digits should be between 8 and 14")]
@@ -45,8 +48,7 @@ namespace SinExWebApp20328991.Models
         public virtual string PostalCode { get; set; }
 
         [Required(ErrorMessage = "The Card type field is required")]
-        [StringLength(6, MinimumLength = 5, ErrorMessage = "The number of postal code digits should be between 5 and 6")]
-        [RegularExpression(@"^American Express$|^Diners Club$|^Discover$|^MaterCard$|^UnionPay$|^Visa$")]
+        [RegularExpression(@"^American Express$|^Diners Club$|^Discover$|^MasterCard$|^UnionPay$|^Visa$",ErrorMessage = "The card type can only be Diners Club or Discover or MasterCard or UnionPay or Visa")]
         [Display(Name = "Type")]
         public virtual string CardType { get; set; }
 
@@ -75,6 +77,8 @@ namespace SinExWebApp20328991.Models
         [Range(1990, 2020)]
         [Display(Name = "Expiry Year")]
         public virtual string ExpiryYear { get; set; }
-         
+
+        //navigation property to Shipments
+        public virtual ICollection<Shipment> Shipments { get; set; }
     }
 }

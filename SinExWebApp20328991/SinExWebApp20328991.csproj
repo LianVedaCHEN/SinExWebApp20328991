@@ -220,7 +220,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\AspIdentityConfiguration.cs" />
+    <Compile Include="Migrations\SinExConfiguration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BusinessShippingAccount.cs" />
     <Compile Include="Models\Currency.cs" />
@@ -237,6 +238,11 @@
     <Compile Include="Models\SinExDatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\FeeSearchViewModel.cs" />
+    <Compile Include="ViewModels\FeesListViewModel.cs" />
+    <Compile Include="ViewModels\FeesReportViewModel.cs" />
+    <Compile Include="ViewModels\FeesSearchViewModel.cs" />
+    <Compile Include="ViewModels\RegisterCustomerViewModel.cs" />
     <Compile Include="ViewModels\ShipmentsListViewModel.cs" />
     <Compile Include="ViewModels\ShipmentsReportViewModel.cs" />
     <Compile Include="ViewModels\ShipmentsSearchViewModel.cs" />
@@ -349,6 +355,13 @@
     <Content Include="Views\BusinessShippingAccounts\Details.cshtml" />
     <Content Include="Views\BusinessShippingAccounts\Edit.cshtml" />
     <Content Include="Views\BusinessShippingAccounts\Index.cshtml" />
+    <Content Include="Views\PersonalShippingAccounts\_PersonalInformationPartial.cshtml" />
+    <Content Include="Views\BusinessShippingAccounts\_BusinessInformationPartial.cshtml" />
+    <Content Include="Views\Shared\_RegisterLoginPartial.cshtml" />
+    <Content Include="Views\ServicePackageFees\CalculateFee.cshtml" />
+    <Content Include="Views\ServicePackageFees\PackagesInfo.cshtml" />
+    <Content Include="Views\ServicePackageFees\_FeesSearchPartial.cshtml" />
+    <Content Include="Views\ServicePackageFees\_FeesListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
